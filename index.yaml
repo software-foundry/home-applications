@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  airflow:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2021-08-09T04:02:33.706120057Z"
+    dependencies:
+    - name: airflow
+      repository: https://airflow.apache.org
+      version: 1.1.0
+    description: A Helm chart for Kubernetes
+    digest: e247ebf91b0ddab8e4c210e09d1e590d3a01bd8071b8db5b58aed1ba9920f364
+    name: airflow
+    type: application
+    urls:
+    - https://github.com/software-foundry/home-applications/releases/download/airflow-1.1.0/airflow-1.1.0.tgz
+    version: 1.1.0
+generated: "2021-08-09T04:02:33.471229645Z"
