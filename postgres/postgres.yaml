@@ -19,3 +19,23 @@ spec:
            secretKeyRef:
               name: postgres-secret
               key: replicationUserPassword
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-lb
+  namespace: postgres
+  labels:
+    app: postgres
+    replicationRole: primary
+spec:
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+      nodePort: 30432
+  selector:
+    app: postgres
+    replicationRole: primary
+  type: LoadBalancer
+
