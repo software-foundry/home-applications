@@ -9,32 +9,22 @@
 # yamllint disable rule:line-length
 config:
   core:
-    dags_folder: '{{ include "airflow_dags" . }}'
-    load_examples: 'False'   # <<<<<<<< This is ignored when used with the official Docker image, see below on how to load examples
-    executor: CeleryKubernetesExecutor
-    # For Airflow 1.10, backward compatibility
-    colored_console_log: 'False'
-    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-  # Authentication backend used for the experimental API
-  api:
-    auth_backend: airflow.api.auth.backend.deny_all
-  logging:
-    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    colored_console_log: 'False'
-  metrics:
-    statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
-    statsd_port: 9125
-    statsd_prefix: airflow
-    statsd_host: '{{ printf "%s-statsd" .Release.Name }}'
-  webserver:
-    enable_proxy_fix: 'True'
-    expose_config: 'True'   # <<<<<<<<<< BY DEFAULT THIS IS 'False' BUT WE CHANGE IT TO 'True' PRIOR TO INSTALLING THE CHART
+    executor: KubernetesExecutor
 webserver:
   service:
     type: LoadBalancer
 flower:
   service:
     type: LoadBalancer
+postgresql:
+  enabled: False
+data:
+  metadataConnection:
+    host: 10.96.135.158
+    port: 5432
+    db: airflow
+    user: airflow
+    pass: fake
 dags:
   gitSync:
     enabled: true
