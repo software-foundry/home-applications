@@ -41,5 +41,5 @@ spec:
     baseImage: pingcap/tidb
     replicas: 1
     service:
-      type: ClusterIP
+      type: NodePort
     config: {}
